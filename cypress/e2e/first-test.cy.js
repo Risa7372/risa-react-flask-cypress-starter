@@ -35,4 +35,18 @@ describe("shipyard flask react example app", () => {
         expect(count).to.be.greaterThan(1000);
       });
   });
+
+  it("Reset counter", () => {
+    cy.get("button")
+      .contains("Reset Counter")
+      .click();
+
+    cy.wait(1000);
+
+    cy.get("p")
+      .contains("Flask server running on port")
+      .should("contain", "1 time");
+
+  });
+
 });
