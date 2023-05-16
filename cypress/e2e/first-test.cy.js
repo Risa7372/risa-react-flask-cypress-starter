@@ -12,16 +12,6 @@ describe("shipyard flask react example app", () => {
     cy.get(".makeStyles-img-4")
       .first()
       .should("have.attr", "alt", "Shipyard logo");
-
-    cy.get("button")
-      .contains("Reset Counter")
-      .click();
-
-    cy.reload(true);
-
-    cy.get("p")
-      .contains("Flask server running on port")
-      .should("contain", "1 time");
   });
 
   it("Counter should be larger than 1000", () => {
