@@ -10,8 +10,7 @@ import datetime
 
 blueprint = Blueprint('counter', __name__)
 
-RESPONSE_TEMPLATE = 'Flask server running on port 8080. Pinged {count} {times}, \
-most recently on {date}.'
+RESPONSE_TEMPLATE = '{count} {times}'
 
 
 @blueprint.route('/')
@@ -36,6 +35,5 @@ def api():
     times = 'time' if counter.count == 1 else 'times'
     response = RESPONSE_TEMPLATE.format(
         count=counter.count,
-        times=times,
-        date=dateStr)
+        times=times)
     return jsonify(response=response)
