@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Box, Button, Card, Link } from '@material-ui/core';
-import Prism from 'prismjs';
+import { useEffect, useState } from "react";
+import { Box, Button, Card, Link } from "@material-ui/core";
+import Prism from "prismjs";
 
-import flaskLogo from '../assets/images/flask.png';
+import flaskLogo from "../assets/images/flask.png";
 
 function ResponseBlock(props) {
   useEffect(() => {
@@ -22,14 +22,14 @@ function ConnectCard(props) {
   const { classes } = props;
 
   const fetchData = () => {
-    fetch('/api/v1/')
-      .then((res) => res.json())
+    fetch("/api/v1/")
+      .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           setIsLoaded(true);
           setData(result);
         },
-        (error) => {
+        error => {
           setIsLoaded(true);
           setError(error);
         }
@@ -37,9 +37,9 @@ function ConnectCard(props) {
   };
 
   const resetCounter = () => {
-    fetch('/api/v1/reset/')
-      .then((res) => res.json())
-      .then((data) => fetchData());
+    fetch("/api/v1/reset/")
+      .then(res => res.json())
+      .then(data => fetchData());
   };
 
   useEffect(() => fetchData(), []);
@@ -57,36 +57,45 @@ function ConnectCard(props) {
   } else
     return (
       <Card className={classes.card}>
-        <h2>Connect to a server</h2>
-        <Box
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          mt={-3}
-          mb={-1}
+        <div
+          style={{
+            fontSize: "48px",
+            fontWeight: "bold",
+            marginTop: "9px",
+            lineHeight: "72px"
+          }}
         >
-          <Box mr={1}>
-            <h3>Powered by</h3>
-          </Box>
-          <img width="75px" height="100%" src={flaskLogo} alt="Flask Logo" />
-        </Box>
+          API Call Count
+        </div>
+        <div
+          id="api-call-counter"
+          style={{
+            fontSize: "48px",
+            fontWeight: "bold",
+            lineHeight: "72px",
+            border: "1px solid hsl(199, 91%, 59%)",
+            borderRadius: "4px",
+            padding: "0.3em 0.5em 0.15em",
+            backgroundColor: "hsla(199, 91%, 59%, 0.05)"
+          }}
+        >
+          {data.response}
+        </div>
+
         <p>
-          This React frontend is connected to a Flask server. Below is the
+          This React frontend is connected to a Flask server. Above is the
           response message we receive when we ping the server:
         </p>
 
-        <pre className={classes.pre}>
-          <p className={classes.response}>
-            {'>'} {data.response}
-          </p>
-        </pre>
+        <p>Flask server running on port 8080.</p>
 
         <p>
-          The server ping count is stored to the database. Click below to{' '}
+          The server ping count is stored to the database. Click below to{" "}
           <b>reset the counter:</b>
         </p>
         <Box display="flex" justifyContent="center">
           <Button
+            id="api-call-reset-button"
             variant="contained"
             size="small"
             className={classes.contained}
@@ -95,19 +104,6 @@ function ConnectCard(props) {
             Reset Counter
           </Button>
         </Box>
-        <p>
-          The <b>endpoint</b> that resets the ping counter is located in{' '}
-          <code>
-            <Link
-              className={classes.link}
-              href={`${process.env.REACT_APP_STARTER_REPO_URL}backend/src/routes/counter.py#L23-L27`}
-              target="_blank"
-            >
-              backend/src/routes/counter.py
-            </Link>
-          </code>
-          :
-        </p>
         <ResponseBlock language="language-js" code={codeBlock} />
       </Card>
     );
