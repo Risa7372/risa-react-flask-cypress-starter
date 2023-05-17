@@ -105,7 +105,12 @@ function App() {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Box className={classes.box} display="flex" alignItems="center">
               <Box display="flex" flexDirection="column" alignItems="center">
-                <img className={classes.img} src={logo} alt="Shipyard logo" />
+                <img
+                  className={classes.img}
+                  src={logo}
+                  alt="Shipyard logo"
+                  id="page-logo"
+                />
               </Box>
               <Box alignItems="center" display="flex" justifyContent="center">
                 <h1 style={{ marginTop: 0, marginBottom: 0 }}>
